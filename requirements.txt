@@ -1,0 +1,6 @@
+psycopg2-binary
+flask
+dotenv
+sqlalchemy
+sqlalchemy_utils
+Flask-Migrate
