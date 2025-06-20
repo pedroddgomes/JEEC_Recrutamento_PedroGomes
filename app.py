@@ -30,20 +30,13 @@ def create_app():
     def hello():
         return "Hello from Flask"
 
-    # Character route to fetch by ID
-    @app.route("/characters/<int:char_id>", methods=["GET"])
-    def get_character(char_id):
-        char = db_session.query(Character).get(char_id)
-        if not char:
-            return jsonify({"error": "Character not found"}), 404
-        return jsonify({
-            "id": char.id,
-            "name": char.name,
-            "age": char.age,
-            "birthday": char.birthday,
-            "gender": char.gender,
-            "alive": char.alive
-        })
+    # Example route to fetch by ID
+    @app.route("/get_example/<int:id>", methods=["GET"])
+    def get_example(id):
+        example = ExampleFinder.get_from_id(id=id)
+        if example:
+            return jsonify({"id": example.id, "body": example.body})
+        return jsonify({"error": "Example not found"}), 404
 
     # Example route to create one
     @app.route("/characters", methods=["POST"])
